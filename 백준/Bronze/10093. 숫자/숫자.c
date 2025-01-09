@@ -4,27 +4,24 @@
 
 int main() {
 	
-	unsigned int a, b;
-	scanf("%u %u", &a, &b);
+	unsigned long long a, b;
+	scanf("%llu %llu", &a, &b);
 
 	if (a > b) {
-		printf("%u\n", a-b - 1);
-		for (unsigned int i = b + 1; i < a; i++) {
-			printf("%u ", i);
+		printf("%llu\n", a - b - 1);
+		for (unsigned long long i = b + 1; i < a; i++) {
+			printf("%llu ", i);
 		}
 	}
 	else if (a == b) {
 		printf("0");
 	}
 	else {
-		printf("%u\n", b - a - 1);
-		for (unsigned int i = a + 1; i < b; i++) {
-			printf("%u ", i);
+		printf("%llu\n", b - a - 1);
+		for (unsigned long long i = a + 1; i < b; i++) {
+			printf("%llu ", i);
 		}
 	}
 	
-
-	
-
 	return 0;
 }
