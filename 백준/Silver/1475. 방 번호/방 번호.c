@@ -1,37 +1,49 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
+
 	int n;
 	scanf("%d", &n);
 
-	int num[10] = { 0 };  // 각 숫자의 빈도수를 저장할 배열
+	int num[10];
 
-	// 각 자리수별로 숫자의 빈도수를 증가
-	while (n > 0) {
-		num[n % 10]++;
-		n /= 10;
+	int round = 0;
+	while (1) {
+		if (n == 0) {
+			break;
+		}
+		num[round] = n % 10;
+		n = n / 10;
+		round++;
 	}
 
-	// 6과 9의 합을 계산하고 반올림하여 필요한 세트 개수를 결정
-	int six_nine_count = (num[6] + num[9] + 1) / 2;
+	int cnt = 0;
+	int ind[10] = { 0 };
+	for (int i = 0; i < round; i++) {
+		if (num[i] == 6 || num[i] == 9) {
+			cnt++;
+		}
+		int k = num[i];
+		ind[k]++;
+	}
 
-	// 6과 9를 제외한 숫자 중 최대 빈도수를 구함
-	int max_count = 0;
-	for (int i = 0; i < 10; i++) {
-		if (i != 6 && i != 9) {
-			if (num[i] > max_count) {
-				max_count = num[i];
+	int max = -999;
+	for (int j = 0; j < 10; j++) {
+		if (j != 6 && j != 9) {
+			if (ind[j] > max) {
+				max = ind[j];
 			}
 		}
+
 	}
 
-	// 필요한 세트의 최소값을 출력
-	if (six_nine_count > max_count) {
-		printf("%d", six_nine_count);
+	if (max > (cnt+1) / 2) {
+		printf("%d", max);
 	}
 	else {
-		printf("%d", max_count);
+		printf("%d", (cnt+1) / 2);
 	}
 
 	return 0;
